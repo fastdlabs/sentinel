@@ -7,7 +7,7 @@ FastD sentinel
 ##　配置FastD sentinel
 
 - 添加配置
-在config/server.php添加配置registry
+在config/config.php添加配置registry
 ```php
     'registry' => [
         //注册中心地址
@@ -18,9 +18,10 @@ FastD sentinel
 ```
 
 - 注册
-在config/server.php添加配置processes
-```php
-    'processes' => [
-        \ServiceProvider\Sentinel\SentinelProcess::class
-    ],
-```
+在config/process.php添加配置
+ ```php
+     'sentinel' => [
+         \ServiceProvider\Sentinel\SentinelProcess::class
+     ],
+ ```
+ 运行php bin/process sentinel
