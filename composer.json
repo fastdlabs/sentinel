@@ -1,0 +1,26 @@
+{
+    "name": "fastdlabs/sentinel",
+    "require": {
+        "php": ">=7.1",
+        "fastd/fastd": "^3.2"
+
+    },
+    "require-dev": {
+        "eaglewu/swoole-ide-helper": "dev-master",
+        "phpunit/phpunit": "^5.0",
+        "liron-li/php-zookeeper-ide-helper": "^0.1.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "ServiceProvider\\Sentinel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "core"
+        }
+    }
+}
