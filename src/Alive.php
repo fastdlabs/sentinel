@@ -7,7 +7,7 @@
  * @see      http://www.fastdlabs.com/
  */
 
-namespace ServiceProvider\sentinel\src;
+namespace ServiceProvider\Sentinel;
 
 
 use FastD\Swoole\Client;
