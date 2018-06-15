@@ -30,26 +30,30 @@ class Alive extends Client
 
     public function register()
     {
-        $this->on("connect", function($client) {
-            $client->send(json_encode((new RegistryConfig())->get()));
-        });
-
-        $this->on("receive", function($cli, $data){
-            echo "接收信息: ".$data.PHP_EOL;
-        });
-
-        $this->on("error", function($client){
-            echo '连接失败'.PHP_EOL;
-            //服务注册失败稍后再试
-            $this->timeAfter();
-        });
-
-        $this->on("close", function($client){
-            echo '连接断开'.PHP_EOL;
-            //服务注册断开稍后再试
-            $this->timeAfter();
-        });
-
         $this->start();
+    }
+
+    public function onConnect(swoole_client $client)
+    {
+        $client->send(json_encode((new RegistryConfig())->get()));
+    }
+
+    public function onReceive(swoole_client $client, $data)
+    {
+        echo "接收信息: ".$data.PHP_EOL;
+    }
+
+    public function onError(swoole_client $client)
+    {
+        echo '连接失败'.PHP_EOL;
+        //服务注册失败稍后再试
+        $this->timeAfter();
+    }
+
+    public function onClose(swoole_client $client)
+    {
+        echo '连接断开'.PHP_EOL;
+        //服务注册断开稍后再试
+        $this->timeAfter();
     }
 }

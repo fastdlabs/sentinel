@@ -4,7 +4,7 @@ FastD sentinel
 ## 说明
 仅支持php-cli
 
-##　配置FastD sentinel
+## 配置FastD sentinel
 
 - 添加配置
 在config/config.php添加配置registry
@@ -24,4 +24,4 @@ FastD sentinel
          \ServiceProvider\Sentinel\SentinelProcess::class
      ],
  ```
- 运行php bin/process sentinel
+ 运行php bin/process sentinel start
