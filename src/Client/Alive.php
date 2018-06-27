@@ -7,39 +7,56 @@
  * @see      http://www.fastdlabs.com/
  */
 
-namespace ServiceProvider\Sentinel;
+namespace ServiceProvider\Sentinel\Client;
 
 
+use FastD\Packet\Json;
 use FastD\Swoole\Client;
 use swoole_client;
+use ServiceProvider\Sentinel\ServerStatus;
 
+/**
+ * Class Alive
+ * @package ServiceProvider\Sentinel
+ */
 class Alive extends Client
 {
-    public function __construct($uri = null, $async = true, $keep = false)
-    {
-        parent::__construct($uri, $async, $keep);
-    }
+    /**
+     * @var array
+     */
+    protected $config = [];
 
+    protected $data_packet = [];
+
+    /**
+     * Alive constructor.
+     * @param array $config
+     */
+    public function __construct(array $config, $async = true, $keep_alive = false)
+    {
+        parent::__construct($config['host'], $async, $keep_alive);
+    }
 
     protected function timeAfter()
     {
-        timer_after(config()->get('registry.retry_interval'), function () {
-            $this->register();
-        });
-    }
 
-    public function register()
-    {
-        $this->start();
     }
 
     public function onConnect(swoole_client $client)
     {
-        $client->send(json_encode((new RegistryConfig())->get()));
+        $packet = Json::encode([
+            'method' => 'POST',
+            'path' => '/v1/services',
+            'args' => ServerStatus::make()->getArrayCopy()
+        ]);
+
+        $client->send($packet);
     }
 
     public function onReceive(swoole_client $client, $data)
     {
+        $data = Json::decode($data);
+        $data = json_encode($data, JSON_PRETTY_PRINT);
         echo "接收信息: ".$data.PHP_EOL;
     }
 
