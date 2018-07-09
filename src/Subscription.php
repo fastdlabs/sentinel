@@ -36,7 +36,7 @@ class Subscription extends Client
     {
         $data = Json::decode($data);
         $nodes = json_encode($data['list'], JSON_PRETTY_PRINT);
-        $file = new FileObject('/tmp/services/'.$data['service'].'.json', 'rw+');
+        $file = new FileObject(SentinelInterface::PATH.'/'.$data['service'].'.json', 'rw+');
         $file->fwrite($nodes);
         echo "接收信息: ".$nodes.PHP_EOL;
     }
