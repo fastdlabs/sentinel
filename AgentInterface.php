@@ -7,10 +7,10 @@
  * @see      http://www.fastdlabs.com/
  */
 
-namespace FastD\Sentinel;
+namespace ServiceProvider\sentinel;
 
 
-interface SentinelInterface
+interface AgentInterface
 {
     const PATH = '/tmp/services';
 }

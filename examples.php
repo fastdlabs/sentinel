@@ -9,10 +9,10 @@
 
 include __DIR__ . '/../../../vendor/autoload.php';
 
-include __DIR__ . '/src/Client.php';
+include __DIR__ . '/Client.php';
 
 $client = new \FastD\Sentinel\Client('dobee');
 
-$response = $client->call('/');
+$response = $client->call('root');
 
 print_r($response);

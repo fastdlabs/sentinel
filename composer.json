@@ -2,16 +2,18 @@
     "name": "fastdlabs/sentinel",
     "require": {
         "php": ">=5.6",
-        "fastd/fastd": "^3.1"
+        "fastd/swoole": "^2.0"
 
     },
     "require-dev": {
-        "eaglewu/swoole-ide-helper": "dev-master",
         "phpunit/phpunit": "^5.0"
     },
     "autoload": {
         "psr-4": {
-            "FastD\\Sentinel\\": "src"
-        }
+            "FastD\\Sentinel\\": ""
+        },
+        "files": [
+            "helpers.php"
+        ]
     }
 }
